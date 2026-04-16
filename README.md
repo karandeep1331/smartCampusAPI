@@ -8,7 +8,9 @@ Student ID:
 
 # Urls
 http://localhost:8080/SmartcampusAPI-CSA/api/v1
+
 http://localhost:8080/SmartcampusAPI-CSA/api/v1/rooms
+
 http://localhost:8080/SmartcampusAPI-CSA/api/v1/sensors
 
 # Report
