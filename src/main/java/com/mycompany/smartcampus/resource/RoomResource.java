@@ -16,14 +16,13 @@ import java.util.*;
  * @author karandeep Singh Jalf
  */
 
-
-
 @Path("/rooms")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RoomResource {
 
-    public static Map<String, Room> rooms = new HashMap<>();
+    // Shared in-memory storage (thread-safe)
+  public static Map<String, Room> rooms = new HashMap<>();
 
     // GET all rooms
     @GET
@@ -33,8 +32,8 @@ public class RoomResource {
 
     // GET room by ID
     @GET
-    @Path("/{id}")
-    public Response getRoom(@PathParam("id") String id) {
+    @Path("/{roomid}")
+    public Response getRoom(@PathParam("roomid") String id) {
 
         Room room = rooms.get(id);
 
@@ -57,7 +56,6 @@ public class RoomResource {
                     .build();
         }
 
-      
         if (rooms.containsKey(room.getId())) {
             return Response.status(Response.Status.CONFLICT)
                     .entity(Map.of("error", "Room already exists"))
@@ -73,8 +71,8 @@ public class RoomResource {
 
     // DELETE room
     @DELETE
-    @Path("/{roomid}") 
-    public Response deleteRoom(@PathParam("id") String id) {
+    @Path("/{roomid}")
+    public Response deleteRoom(@PathParam("roomid") String id) {
 
         Room room = rooms.get(id);
 
@@ -84,6 +82,7 @@ public class RoomResource {
                     .build();
         }
 
+        // Prevent deletion if sensors are attached
         if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
             throw new RoomNotEmptyException("Room has sensors assigned");
         }
