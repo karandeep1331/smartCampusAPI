@@ -21,7 +21,7 @@ public class SensorUnavailableExceptionMapper implements ExceptionMapper<SensorU
 
         ErrorMessage error = new ErrorMessage(
                 ex.getMessage(),
-                Response.Status.SERVICE_UNAVAILABLE.getStatusCode(),
+                Response.Status.FORBIDDEN.getStatusCode(),
                 "/docs/errors#sensor-unavailable"
         );
 

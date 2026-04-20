@@ -21,7 +21,7 @@ import java.util.*;
 @Consumes(MediaType.APPLICATION_JSON)
 public class RoomResource {
 
-    // Shared in-memory storage (thread-safe)
+
   public static Map<String, Room> rooms = new HashMap<>();
 
     // GET all rooms
@@ -69,7 +69,7 @@ public class RoomResource {
                 .build();
     }
 
-    // DELETE room
+    // Delete room
     @DELETE
     @Path("/{roomid}")
     public Response deleteRoom(@PathParam("roomid") String id) {
