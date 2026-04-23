@@ -24,13 +24,13 @@ public class RoomResource {
 
   public static Map<String, Room> rooms = new HashMap<>();
 
-    // GET all rooms
+
     @GET
     public Collection<Room> getAllRooms() {
         return rooms.values();
     }
 
-    // GET room by ID
+
     @GET
     @Path("/{roomid}")
     public Response getRoom(@PathParam("roomid") String id) {
@@ -46,7 +46,6 @@ public class RoomResource {
         return Response.ok(room).build();
     }
 
-    // CREATE room
     @POST
     public Response createRoom(Room room) {
 
@@ -69,7 +68,7 @@ public class RoomResource {
                 .build();
     }
 
-    // Delete room
+
     @DELETE
     @Path("/{roomid}")
     public Response deleteRoom(@PathParam("roomid") String id) {
@@ -82,7 +81,6 @@ public class RoomResource {
                     .build();
         }
 
-        // Prevent deletion if sensors are attached
         if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
             throw new RoomNotEmptyException("Room has sensors assigned");
         }

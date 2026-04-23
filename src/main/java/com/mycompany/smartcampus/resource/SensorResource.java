@@ -80,19 +80,17 @@ public class SensorResource {
 
         return Response.ok(sensor).build();
     }
-    // DELETE sensor
+
     @DELETE
     @Path("/{sensorId}")
     public Response deleteSensor(@PathParam("sensorId") String sensorId) {
 
         Sensor sensor = sensors.get(sensorId);
 
-        //  Check if exists
         if (sensor == null) {
             throw new NotFoundException("Sensor not found");
         }
 
-        // Check if linked to a room (COURSEWORK RULE)
         for (Room room : RoomResource.rooms.values()) {
             if (room.getSensorIds().contains(sensorId)) {
                 return Response.status(Response.Status.CONFLICT)

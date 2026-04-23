@@ -15,14 +15,14 @@ public class SensorReading {
 
 public SensorReading() {}
 
-    // Optional constructor
+
     public SensorReading(String id, long timestamp, double value) {
         this.id = id;
         this.timestamp = timestamp;
         this.value = value;
     }
 
-    // Getters & Setters
+
     public String getId() {
         return id;
     }
